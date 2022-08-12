@@ -1,0 +1,74 @@
+<div class="container-fluid">
+  <h1 class="h3 mb-4 text-gray-800">Register</h1>
+
+  <div class="row">
+    <div class="col-lg-8">
+      <!-- untuk upload gambar menggunakan enctype -->
+      <form
+        action="<%= result !== null ? `/makanan/update/${result.id}` : `/makanan/create`%>"
+        method="POST"
+        enctype="multipart/form-data"
+      >
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Nama</label>
+          <div class="col-sm-10">
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              name="name"
+              value="<%= result !== null ? result.name : `` %>"
+            />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Harga</label>
+          <div class="col-sm-10">
+            <input
+              type="number"
+              class="form-control"
+              id="harga"
+              name="harga"
+              value="<%= result !== null ? result.harga : `` %>"
+            />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Picture</label>
+          <div class="col-sm-10">
+            <div class="row">
+              <div class="col-sm-10">
+                <div class="custom-file">
+                  <input
+                    class="custom-file-input"
+                    type="file"
+                    id="foto"
+                    name="foto"
+                    onchange="tampilkanPreview(this,'preview')"
+                  />
+                  <label class="custom-file-label" for="foto"
+                    >Choose file</label
+                  >
+                </div>
+              </div>
+              <div class="col-sm-3">
+                <img
+                  class="img-thumbnail"
+                  id="preview"
+                  src=""
+                  alt=""
+                  width="320px"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group row justify-content-end">
+          <div class="col-sm-12">
+            <button type="submit" class="btn btn-primary">Simpan</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
