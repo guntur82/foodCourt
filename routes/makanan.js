@@ -2,6 +2,7 @@ const makananRoute = require('express').Router();
 const { MakananController } = require('../controller');
 
 makananRoute.get('/', MakananController.getData);
+makananRoute.get('/read', MakananController.readPage);
 makananRoute.get('/create', MakananController.createPage);
 makananRoute.post('/create', MakananController.create);
 makananRoute.get('/update/:id', MakananController.updatePage);

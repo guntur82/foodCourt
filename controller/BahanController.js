@@ -5,9 +5,18 @@ class BahanController {
       let result = await bahan.findAll({
         order: [['id', 'asc']],
       });
-      res.json(result);
+      // res.json(result);
+      res.render('staff/bahan');
     } catch (err) {
       res.json('err = ' + err);
+    }
+  }
+  static async readPage(req, res) {
+    try {
+      let result = await bahan.findAll();
+      res.render('staff/menu_bahan', { result: result });
+    } catch (error) {
+      res.json(error);
     }
   }
   static async createPage(req, res) {}

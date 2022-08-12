@@ -5,12 +5,23 @@ class MakananController {
       let result = await makanan.findAll({
         order: [['id', 'asc']],
       });
-      res.json(result);
+      // res.json(result);
+      res.render('staff/makanan');
     } catch (err) {
       res.json(err);
     }
   }
+
+  static async readPage(req, res) {
+    try {
+      res.render('staff/menu_makanan');
+    } catch (error) {
+      res.json(error);
+    }
+  }
+
   static async createPage(req, res) {}
+
   static async create(req, res) {
     try {
       const { name, harga, foto } = req.body;
@@ -24,6 +35,7 @@ class MakananController {
       res.json(err);
     }
   }
+
   static async updatePage(req, res) {}
   static async update(req, res) {
     try {

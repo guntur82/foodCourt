@@ -2,6 +2,7 @@ const bahanRoute = require('express').Router();
 const { BahanController } = require('../controller');
 
 bahanRoute.get('/', BahanController.getData);
+bahanRoute.get('/read', BahanController.readPage);
 bahanRoute.get('/create', BahanController.createPage);
 bahanRoute.post('/create', BahanController.create);
 bahanRoute.get('/add/:id', BahanController.addPage);
