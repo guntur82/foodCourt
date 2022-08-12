@@ -1,0 +1,32 @@
+<div class="container-fluid">
+  <h1 class="h3 mb-4 text-gray-800">Register</h1>
+
+  <div class="row">
+    <div class="col-lg-8">
+      <!-- untuk upload gambar menggunakan enctype -->
+      <form
+        action="<%= result !== null ? `/bahan/update/${result.id}` : `/bahan/create`%>  "
+        method="POST"
+        enctype="multipart/form-data"
+      >
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Nama</label>
+          <div class="col-sm-10">
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              name="name"
+              value="<%= result !== null ? `${result.name}` : `` %>"
+            />
+          </div>
+        </div>
+        <div class="form-group row justify-content-end">
+          <div class="col-sm-12">
+            <button type="submit" class="btn btn-primary">Simpan</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -19,34 +19,47 @@ class BahanController {
       res.json(error);
     }
   }
-  static async createPage(req, res) {}
+  static async createPage(req, res) {
+    try {
+      res.render('staff/menu_bahan/actionindex', { result: null });
+    } catch (error) {
+      res.json(error);
+    }
+  }
   static async create(req, res) {
     try {
-      const { name, stok } = req.body;
+      const { name } = req.body;
       let result = await bahan.create({
         name,
-        stok,
+        stok: 0,
       });
-      res.json(result);
+      res.redirect('/bahan/read');
     } catch (err) {
       res.json('err = ' + err);
     }
   }
-  static async updatePage(req, res) {}
+  static async updatePage(req, res) {
+    try {
+      const id = req.params.id;
+      let result = await bahan.findByPk(id);
+      res.render('staff/menu_bahan/actionindex', { result: result });
+    } catch (error) {
+      res.json(error);
+    }
+  }
   static async update(req, res) {
     try {
       const id = req.params.id;
-      const { name, stok } = req.body;
+      const { name } = req.body;
       let result = await bahan.update(
         {
           name,
-          stok,
         },
         {
           where: { id },
         }
       );
-      res.json(result);
+      res.redirect('/bahan/read');
     } catch (err) {
       res.json(err);
     }
@@ -57,7 +70,7 @@ class BahanController {
       let result = await bahan.destroy({
         where: { id },
       });
-      res.json(result);
+      res.redirect('/bahan/read');
     } catch (err) {
       res.json(err);
     }

@@ -3,7 +3,7 @@
 <div class="container-fluid">
   <!-- Page Heading -->
   <h1 class="h3 mb-4 text-gray-800">Bahan</h1>
-      <a href="" class="btn btn-success btn-user btn-block col-1 ml-auto">Add</a>
+      <a href="/bahan/create" class="btn btn-success btn-user btn-block col-lg-1 ml-auto"><i class="fas fa-plus"></i></a>
   <table id="dataTable" class="table table-borderless fa-fw col-lg-12">
     <thead>
       <tr>
@@ -17,7 +17,10 @@
       <tr>
         <th scope="row"><%= i+1 %><t+1>
         <td><%= data.name%></td>
-        <td></td>
+        <td>
+          <a href="/bahan/update/<%= data.id %> " class="btn btn-primary"><i class="fas fa-search"></i></a>
+          <a href="/bahan/delete/<%= data.id %> " class="btn btn-danger"><i class="fas fa-trash"></i></a>
+        </td>
       </tr>
       <%}) %>
     </tbody>
