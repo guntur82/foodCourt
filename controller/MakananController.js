@@ -1,4 +1,4 @@
-const { makanan } = require('../models');
+const { makanan, bahan_baku, bahan } = require('../models');
 const fs = require('fs');
 
 class MakananController {
@@ -19,6 +19,47 @@ class MakananController {
         order: [['id', 'asc']],
       });
       res.render('staff/menu_makanan', { result: result });
+    } catch (error) {
+      res.json(error);
+    }
+  }
+  static async infoPage(req, res) {
+    try {
+      const id = req.params.id;
+      let result_bahan_baku = await bahan_baku.findAll(
+        {
+          where: { makananId: id },
+        },
+        {
+          order: [['id', 'asc']],
+        }
+      );
+      let result_bahan = await bahan.findAll();
+      let result_makanan = await makanan.findByPk(id);
+      res.render('staff/menu_makanan/info.ejs', {
+        bahan_baku: result_bahan_baku,
+        bahan: result_bahan,
+        makanan: result_makanan,
+      });
+    } catch (error) {
+      res.json(error);
+    }
+  }
+  static async info(req, res) {
+    try {
+      const id = req.params.id;
+      const { data } = req.body;
+      let refresh = bahan_baku.destroy({
+        where: { makananId: id },
+      });
+      await data.forEach((bahan) => {
+        let result = bahan_baku.create({
+          makananId: id,
+          bahanId: +bahan,
+          jumlah: 1,
+        });
+      });
+      res.redirect('/makanan/read');
     } catch (error) {
       res.json(error);
     }
@@ -118,6 +159,9 @@ class MakananController {
       }
       let result = await makanan.destroy({
         where: { id },
+      });
+      let result_bahan = await bahan_baku.destroy({
+        where: { makananId: id },
       });
       res.redirect('/makanan/read');
     } catch (error) {

@@ -1,0 +1,35 @@
+<!-- Begin Page Content -->
+<div class="container-fluid">
+  <!-- Page Heading -->
+  <h1 class="h3 mb-4 text-gray-800">Makanan : <%= makanan.name %></h1>
+  <h1 class="h3 mb-4 text-gray-800">List Bahan :</h1>
+  <form
+    action="<%= `/makanan/info/${makanan.id}` %> "
+    method="POST"
+    enctype="multipart/form-data"
+  >
+    <% let array = [] %> <% bahan.forEach((data,i) => { %> <% let no = i +1; %>
+    <% array.push(data) %> <% if(no%8 === 0 || bahan.length === no){ %>
+    <div class="input-group mb-3">
+      <div class="card mt-2">
+        <div class="card-body">
+          <div class="input-group-prepend">
+            <% array.forEach(result => { %> <input type="checkbox"
+            aria-label="Checkbox for following text input" id="data" name="data"
+            class="mx-2" value="<%= result.id %>" <% bahan_baku.forEach(bahan =>
+            { %> <%= result.id === bahan.bahanId ? `checked` : `` %> <% }) %> />
+            <%= result.name %> <% }); array = [] %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% }}) %>
+    <div class="form-group row justify-content-end">
+      <div class="col-sm-12">
+        <button type="submit" class="btn btn-primary">Simpan</button>
+        <a href="/makanan/read" class="btn btn-secondary">Kembali</a>
+      </div>
+    </div>
+  </form>
+</div>
+<!-- /.container-fluid -->
