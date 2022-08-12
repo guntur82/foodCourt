@@ -3,10 +3,10 @@ class BahanController {
   static async getData(req, res) {
     try {
       let result = await bahan.findAll({
-        order: [['id', 'asc']],
+        order: [['name', 'asc']],
       });
       // res.json(result);
-      res.render('staff/bahan');
+      res.render('staff/bahan', { result: result });
     } catch (err) {
       res.json('err = ' + err);
     }
@@ -76,11 +76,9 @@ class BahanController {
     }
   }
 
-  static async addPage(req, res) {}
   static async add(req, res) {
     try {
-      const id = req.params.id;
-      const { stok } = req.body;
+      const { id, stok } = req.body;
       let stok_awal = await bahan.findByPk(id);
       let stok_tambah = +stok;
       let result = await bahan.update(
@@ -91,7 +89,7 @@ class BahanController {
           where: { id },
         }
       );
-      res.json(result);
+      res.redirect('/bahan');
     } catch (err) {
       res.json(err);
     }
