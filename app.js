@@ -11,6 +11,7 @@ app.use(imageUpload());
 // layout di view
 app.use(expressLayout);
 app.set('layout index', false); //block layout untuk index
+app.set('layout home', false); //block layout untuk home
 app.set('view engine', 'ejs');
 
 app.use(express.json());

@@ -2,10 +2,8 @@ const mejaRoute = require('express').Router();
 const { MejaController } = require('../controller');
 
 mejaRoute.get('/', MejaController.getData);
-mejaRoute.get('/create', MejaController.createPage);
-mejaRoute.post('/create', MejaController.create);
-mejaRoute.get('/update/:id', MejaController.updatePage);
-mejaRoute.post('/update/:id', MejaController.update);
-mejaRoute.get('/delete/:id', MejaController.delete);
+mejaRoute.post('/home', MejaController.home);
+mejaRoute.get('/add', MejaController.add);
+mejaRoute.get('/delete', MejaController.delete);
 
 module.exports = mejaRoute;
