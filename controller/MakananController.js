@@ -1,13 +1,15 @@
-const { makanan, bahan_baku, bahan } = require('../models');
+const { makanan, bahan_baku, bahan, pesanan, meja } = require('../models');
 const fs = require('fs');
 
 class MakananController {
   static async getData(req, res) {
     try {
-      let result = await makanan.findAll({
-        order: [['id', 'asc']],
+      let result = await pesanan.findAll({
+        where: { status_pesanan: 1, status_makanan: 0 },
+        include: [meja, makanan],
       });
-      res.render('staff/makanan');
+      let result_meja = await meja.findAll();
+      res.render('staff/makanan', { result: result, meja: result_meja });
     } catch (err) {
       res.json(err);
     }
@@ -164,6 +166,21 @@ class MakananController {
         where: { makananId: id },
       });
       res.redirect('/makanan/read');
+    } catch (error) {
+      res.json(error);
+    }
+  }
+  static async masak(req, res) {
+    try {
+      const mejaId = req.query.mejaId;
+      const makananId = req.query.makananId;
+      const jumlah = +req.query.jumlah;
+      let sample = {
+        mejaId,
+        makananId,
+        jumlah,
+      };
+      res.json(sample);
     } catch (error) {
       res.json(error);
     }

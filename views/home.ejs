@@ -64,11 +64,11 @@
                 } else { ?>
                         <a class="nav-link pb-0" href="logout-pelanggan.php?no=<?= $no_meja; ?>&kd=1">
                             <?php } ?> -->
-                            <a class="nav-link pb-0" href="#">
-                        <i class="fas fa-sign-out-alt"></i>
-                        <span>
-                            Exit
-                        </span>
+                        <a class="nav-link pb-0" href="/meja/exit?id=<%= result.id %> ">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>
+                                Exit
+                            </span>
                         </a>
             </li>
 
@@ -115,7 +115,7 @@
                                         <td><%= data.jumlah %> </td>
                                         <td><%= data.makanan.harga %> </td>
                                         <td><%= "Rp. " + data.jumlah * data.makanan.harga %></td>
-                                        <td><a href="proses-hapuspesanan.php?kd=1&no=<?= $data['no_meja'] ?>&id=<?= $data['id_makanan']; ?>" class="btn btn-danger">Hapus Pesanan</a></td>
+                                        <td><a href="/meja/delete?mejaId=<%= data.meja.id %>&makananId=<%= data.makanan.id %> " class="btn btn-danger">Hapus Pesanan</a></td>
                                     </tr>
                                     <% }) %> 
                             </tbody>
@@ -142,10 +142,8 @@
                             </div>
                             <div class="form-group row">
                                 <% makanan.forEach((data,i) => { %>
-
-                                
                                     <div class="card mb-3 col-lg-2">
-                                        <label for="email" class="col-lg-20 col-form-label"><%= data.name %> <br><?= "Rp. " . $data['harga_makanan']; ?></label>
+                                        <label for="email" class="col-lg-20 col-form-label"><%= data.name %> <br><%= 'Rp. '+ data.harga %> </label>
                                         <a href="/meja/add?id=<%= result.id %>&makananId=<%= data.id %> ">
                                             <img src="<%= `/uploads/${data.foto}` %>" class="col-sm-17 img-thumbnail">
                                         </a>

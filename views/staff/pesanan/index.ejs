@@ -1,1 +1,86 @@
-pesanan
+<!-- Begin Page Content -->
+<div class="container-fluid">
+  <!-- Page Heading -->
+  <h1 class="h3 mb-4 text-gray-800">Pesanan</h1>
+  <!-- <?php
+    $faktur = mysqli_query($conn, "SELECT * FROM meja WHERE status_nota=1");
+    while ($nota = mysqli_fetch_array($faktur)) {
+      $no_meja = $nota['no_meja'];
+      ?>
+      <div class="card mb-3 col-lg-3">
+        <h1 class="h3 mb-2 text-gray-800">Nota Meja No <?= $nota['no_meja']; ?></h1>
+        <a href="logout-pelanggan.php?no=<?= $no_meja; ?>&kd=2" class="btn btn-info">Accept</a>
+      </div> -->
+  <% meja.forEach((data) => {%>
+  <div class="card mb-3 col-lg-9">
+    <h1 class="h3 mb-2 text-gray-800">Pesanan atas Nama <%= data.name %></h1>
+    <table class="table table-borderless fa-fw">
+      <thead>
+        <tr>
+          <th scope="col">No</th>
+          <th scope="col">Nama Makanan</th>
+          <th scope="col">Jumlah</th>
+          <th scope="col">Detail</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% let no = 0; %>
+        <div><% result.forEach((pesanan, i)=> { %></div>
+        <% if(pesanan.mejaId === data.id){ no++%>
+        <tr>
+          <th scope="row"><%= no %></th>
+          <td><%= pesanan.makanan.name %></td>
+          <td><%= pesanan.jumlah %></td>
+          <td>
+            <a
+              href="/pesanan/proses?mejaId=<%= pesanan.mejaId %>&makananId=<%= pesanan.makananId %>&jumlah=<%= pesanan.jumlah %>"
+              class="btn btn-success"
+              ><i class="fas fa-check"></i
+            ></a>
+          </td>
+        </tr>
+        <% } %> <%}) %>
+      </tbody>
+    </table>
+  </div>
+  <%}) %>
+  <!-- pesan 2 -->
+  <!-- <?php
+    $querynd = mysqli_query($conn, "SELECT * FROM meja WHERE status_meja=1");
+    while ($nond = mysqli_fetch_array($querynd)) {
+      $no_mejand = $nond['no_meja'];
+      $query2nd = mysqli_query($conn, "SELECT * FROM pesanan INNER JOIN makanan WHERE pesanan.id_makanan = makanan.id_makanan AND no_meja='$no_mejand' AND status_makanan=1 AND status_pesanan=1");
+      $ceknd = mysqli_num_rows($query2nd);
+      if ($ceknd > 0) { ?>
+        <div class="card mb-3 col-lg-9">
+          <h1 class="h3 mb-2 text-gray-800">Pesanan Meja <?= $nond['no_meja']; ?> Ready</h1>
+          <table class="table table-borderless fa-fw">
+            <thead>
+              <tr>
+                <th scope="col">No</th>
+                <th scope="col">Nama Makanan</th>
+                <th scope="col">Jumlah</th>
+                <th scope="col">Detail</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php
+              $i = 1;
+              while ($datand = mysqli_fetch_array($query2nd)) {
+                ?>
+                <tr>
+                  <th scope="row"><?= $i; ?></th>
+                  <td><?= $datand['nama_makanan']; ?></td>
+                  <td><?= $datand['jumlah_makanan']; ?></td>
+                  <td>
+                    <a href="proses-accpesanan.php?no=<?= $datand['no_meja'] ?>&id=<?= $datand['id_makanan']; ?>&jml=<?= $datand['jumlah_makanan']; ?>&sm=<?= $datand['status_makanan'] ?>&sp=<?= $datand['status_pesanan']; ?>&nm=<?= $datand['nama_pelanggan']; ?>" class="btn btn-success">Masakan Siap</a>
+                  </td>
+                </tr>
+                <?php $i++;
+              } ?>
+            </tbody>
+          </table>
+        </div>
+      <?php } ?>
+    <?php } ?> -->
+</div>

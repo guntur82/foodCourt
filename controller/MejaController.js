@@ -6,14 +6,10 @@ class MejaController {
       const id = req.query.id;
       let result_data = await meja.findByPk(id);
       let result_makanan = await makanan.findAll();
-      let result_pesanan = await pesanan.findAll(
-        {
-          include: [meja, makanan],
-        },
-        {
-          where: { mejaId: id },
-        }
-      );
+      let result_pesanan = await pesanan.findAll({
+        where: { mejaId: +id, status_makanan: 0, status_pesanan: 0 },
+        include: [meja, makanan],
+      });
       res.render('home.ejs', {
         result: result_data,
         makanan: result_makanan,
@@ -38,7 +34,12 @@ class MejaController {
       const id = req.query.id;
       const makananId = req.query.makananId;
       let result = await pesanan.findAll({
-        where: { mejaId: id, makananId: makananId },
+        where: {
+          mejaId: id,
+          makananId: makananId,
+          status_makanan: 0,
+          status_pesanan: 0,
+        },
       });
       if (result.length > 0) {
         let result_pesanan = await pesanan.update(
@@ -65,8 +66,34 @@ class MejaController {
   }
   static async delete(req, res) {
     try {
+      const id = req.query.mejaId;
+      const makananId = req.query.makananId;
+      let result_hapus = await pesanan.destroy({
+        where: {
+          mejaId: id,
+          makananId,
+        },
+      });
+      res.redirect('/meja?id=' + id);
     } catch (error) {
-      res.json(errror);
+      res.json(error);
+    }
+  }
+
+  static async exit(req, res) {
+    try {
+      const id = req.query.id;
+      let result_hapus = await pesanan.destroy({
+        where: {
+          mejaId: id,
+        },
+      });
+      let result_meja = await meja.destroy({
+        where: { id },
+      });
+      res.redirect('/');
+    } catch (error) {
+      res.json(error);
     }
   }
 }

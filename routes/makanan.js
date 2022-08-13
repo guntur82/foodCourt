@@ -10,5 +10,6 @@ makananRoute.post('/info/:id', MakananController.info);
 makananRoute.get('/update/:id', MakananController.updatePage);
 makananRoute.post('/update/:id', MakananController.update);
 makananRoute.get('/delete/:id', MakananController.delete);
+makananRoute.get('/masak', MakananController.masak);
 
 module.exports = makananRoute;
