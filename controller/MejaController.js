@@ -34,12 +34,6 @@ class MejaController {
     });
     res.redirect('/meja?id=' + result.id);
   }
-  static async show(req, res) {
-    try {
-    } catch (error) {
-      res.json(error);
-    }
-  }
   static async add(req, res) {
     try {
       const id = req.query.id;
