@@ -53,23 +53,12 @@
                 </a>
             </li>
             <li class="nav-item">
-                <!-- <?php
-                $bayar = mysqli_query($conn, "SELECT * FROM pesanan WHERE no_meja=$no_meja AND status_makanan > 0 OR status_pesanan > 0 ");
-                // SELECT * FROM meja WHERE status_meja='1' AND status_nota='1'
-                $status = mysqli_num_rows($bayar);
-                if ($status > 0) {
-                ?>
-                    <a class="nav-link pb-0" href="pesan-meja.php?alert=pesan">
-                    <?php
-                } else { ?>
-                        <a class="nav-link pb-0" href="logout-pelanggan.php?no=<?= $no_meja; ?>&kd=1">
-                            <?php } ?> -->
-                        <a class="nav-link pb-0" href="/meja/exit?id=<%= result.id %> ">
-                            <i class="fas fa-sign-out-alt"></i>
-                            <span>
-                                Exit
-                            </span>
-                        </a>
+                <a class="nav-link pb-0" href="/meja/exit?id=<%= result.id %> ">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>
+                        Exit
+                    </span>
+                </a>
             </li>
 
             <!-- Divider -->
@@ -176,18 +165,7 @@
                                             </tr>
                                             <% }) %> 
                                         <tr>
-                                            <!-- <?php
-                                            $meja = mysqli_query($conn, "SELECT * FROM meja WHERE status_meja=1 AND status_nota=0 AND no_meja='$no_meja' ");
-                                            $nota = mysqli_num_rows($meja);
-                                            if ($nota > 0) {
-                                            ?>
-                                                <th scope="row"><a href="proses-pesanmakanan.php?no=<?= $no_meja ?>&sn=1&sm=1" class="btn btn-success">Nota</a></th>
-                                            <?php
-                                            } else {
-                                            ?>
-                                                <th scope="row"><button class="btn btn-secondary">Nota</a></th>
-                                            <?php } ?> -->
-                                            <th scope="row"></th><!-- nnti ini dihapus -->
+                                            <th scope="row"></th>
                                             <th scope="row"></th>
                                             <th scope="row"></th>
                                             <th scope="row">Subtotal</th>

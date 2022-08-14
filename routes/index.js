@@ -1,9 +1,6 @@
 const route = require('express').Router();
 
 route.get('/', (req, res) => {
-  // res.json({
-  //   message: 'Ready',
-  // });
   res.render('index.ejs', { layout: 'index' });
 });
 

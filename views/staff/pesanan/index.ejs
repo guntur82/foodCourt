@@ -2,15 +2,6 @@
 <div class="container-fluid">
   <!-- Page Heading -->
   <h1 class="h3 mb-4 text-gray-800">Pesanan</h1>
-  <!-- <?php
-    $faktur = mysqli_query($conn, "SELECT * FROM meja WHERE status_nota=1");
-    while ($nota = mysqli_fetch_array($faktur)) {
-      $no_meja = $nota['no_meja'];
-      ?>
-      <div class="card mb-3 col-lg-3">
-        <h1 class="h3 mb-2 text-gray-800">Nota Meja No <?= $nota['no_meja']; ?></h1>
-        <a href="logout-pelanggan.php?no=<?= $no_meja; ?>&kd=2" class="btn btn-info">Accept</a>
-      </div> -->
   <% meja.forEach((data) => {%>
   <div class="card mb-3 col-lg-9">
     <h1 class="h3 mb-2 text-gray-800">Pesanan atas Nama <%= data.name %></h1>
