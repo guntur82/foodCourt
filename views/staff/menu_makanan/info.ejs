@@ -8,16 +8,21 @@
     method="POST"
     enctype="multipart/form-data"
   >
-    <% let array = [] %> <% bahan.forEach((data,i) => { %> <% let no = i +1; %>
-    <% array.push(data) %> <% if(no%8 === 0 || bahan.length === no){ %>
+    <% let array = [] %> 
+    <% bahan.forEach((data,i) => { %> 
+    <% let no = i +1; %>
+    <% array.push(data) %> 
+    <% if(no%8 === 0 || bahan.length === no){ %>
     <div class="input-group mb-3">
       <div class="card mt-2">
         <div class="card-body">
           <div class="input-group-prepend">
-            <% array.forEach(result => { %> <input type="checkbox"
+            <% array.forEach(result => { %> 
+              <input type="checkbox"
             aria-label="Checkbox for following text input" id="data" name="data"
-            class="mx-2" value="<%= result.id %>" <% bahan_baku.forEach(bahan =>
-            { %> <%= result.id === bahan.bahanId ? `checked` : `` %> <% }) %> />
+            class="mx-2" value="<%= result.id %>" 
+            <% bahan_baku.forEach(bahan => { %> 
+              <%= result.id === bahan.bahanId ? `checked` : ``  }) %> />
             <%= result.name %> <% }); array = [] %>
           </div>
         </div>

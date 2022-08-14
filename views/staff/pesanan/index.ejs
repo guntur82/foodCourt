@@ -16,7 +16,7 @@
       </thead>
       <tbody>
         <% let no = 0; %>
-        <div><% result.forEach((pesanan, i)=> { %></div>
+        <% result.forEach((pesanan, i)=> { %>
         <% if(pesanan.mejaId === data.id){ no++%>
         <tr>
           <th scope="row"><%= no %></th>
