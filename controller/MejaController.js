@@ -10,10 +10,15 @@ class MejaController {
         where: { mejaId: +id, status_makanan: 0, status_pesanan: 0 },
         include: [meja, makanan],
       });
+      let result_pesanan_makanan = await pesanan.findAll({
+        where: { mejaId: +id, status_makanan: 1, status_pesanan: 0 },
+        include: [meja, makanan],
+      });
       res.render('home.ejs', {
         result: result_data,
         makanan: result_makanan,
         pesanan: result_pesanan,
+        pesanan_makanan: result_pesanan_makanan,
         layout: 'home',
       });
     } catch (error) {
@@ -28,6 +33,12 @@ class MejaController {
       status_nota: 0,
     });
     res.redirect('/meja?id=' + result.id);
+  }
+  static async show(req, res) {
+    try {
+    } catch (error) {
+      res.json(error);
+    }
   }
   static async add(req, res) {
     try {

@@ -8,7 +8,16 @@ class MakananController {
         where: { status_pesanan: 1, status_makanan: 0 },
         include: [meja, makanan],
       });
-      let result_meja = await meja.findAll();
+      let list_meja = result.map((data) => {
+        return data.meja;
+      });
+      // remove duplicate array of object
+      let result_meja = list_meja.reduce((data, index) => {
+        if (!data.some((meja) => meja.id === index.id)) {
+          data.push(index);
+        }
+        return data;
+      }, []);
       res.render('staff/makanan', { result: result, meja: result_meja });
     } catch (err) {
       res.json(err);
@@ -175,12 +184,50 @@ class MakananController {
       const mejaId = req.query.mejaId;
       const makananId = req.query.makananId;
       const jumlah = +req.query.jumlah;
-      let sample = {
-        mejaId,
-        makananId,
-        jumlah,
-      };
-      res.json(sample);
+      let bahan_makanan = await bahan_baku
+        .findAll({
+          where: { makananId },
+          include: [bahan],
+        })
+        .then((result) => {
+          result.forEach((data) => {
+            let bahan_terpakai = bahan.update(
+              {
+                stok: data.bahan.stok - jumlah,
+              },
+              {
+                where: { id: data.bahanId },
+              }
+            );
+          });
+        });
+      let list_pesanan = await pesanan.findAll({
+        where: { mejaId, makananId, status_pesanan: 1, status_makanan: 1 },
+      });
+      if (list_pesanan.length > 0) {
+        let jumlah_pesanan_lama = +list_pesanan[0].jumlah;
+        let result_pesanan = await pesanan.update(
+          {
+            jumlah: jumlah_pesanan_lama + jumlah,
+          },
+          {
+            where: { mejaId, makananId, status_pesanan: 1, status_makanan: 1 },
+          }
+        );
+        let delete_pesanan = await pesanan.destroy({
+          where: { mejaId, makananId, status_pesanan: 1, status_makanan: 0 },
+        });
+      } else {
+        let result_pesanan = await pesanan.update(
+          {
+            status_makanan: 1,
+          },
+          {
+            where: { mejaId, makananId, status_pesanan: 1 },
+          }
+        );
+      }
+      res.redirect('/makanan');
     } catch (error) {
       res.json(error);
     }

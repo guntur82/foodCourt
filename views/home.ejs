@@ -151,10 +151,7 @@
                                     <%}) %> 
                             </div>
                             </form>
-                            <!-- <?php
-                            $query2 = mysqli_query($conn, "SELECT * FROM pesanan INNER JOIN makanan WHERE pesanan.id_makanan = makanan.id_makanan AND no_meja='$no_meja' AND status_makanan=1 AND status_pesanan=0");
-                            $cek2 = mysqli_num_rows($query2);
-                            if ($cek2 > 0) { ?>
+                            <% if(pesanan_makanan.length > 0) { %>
                                 <h1 class="h3 mb-4 text-gray-800">Pesanan Ready</h1>
                                 <table class="table table-borderless">
                                     <thead>
@@ -166,23 +163,20 @@
                                             <th scope="col">Total</th>
                                         </tr>
                                     </thead>
+                                    <% let total = 0; %> 
                                     <tbody>
-                                        <?php
-                                        $i = 1;
-                                        while ($data2 = mysqli_fetch_array($query2)) {
-                                        ?>
+                                        <% pesanan_makanan.forEach((data,i) => { %>
                                             <tr>
-                                                <th scope="row"><?= $i; ?></th>
-                                                <td><?= $data2['nama_makanan']; ?></td>
-                                                <td><?= $data2['jumlah_makanan']; ?></td>
-                                                <td><?= "Rp. " . format_ribuan($data2['harga_makanan']); ?></td>
-                                                <td><?= "Rp. " . format_ribuan($data2['jumlah_makanan'] * $data2['harga_makanan']); ?></td>
-                                                <?php $total += ($data2['jumlah_makanan'] * $data2['harga_makanan']); ?>
+                                                <th scope="row"><%= i+1 %> </th>
+                                                <td><%= data.makanan.name %> </td>
+                                                <td><%= data.jumlah %> </td>
+                                                <td><%= data.makanan.harga %> </td>
+                                                <td><%= "Rp. " + data.jumlah * data.makanan.harga %></td>
+                                                <% total += data.jumlah * data.makanan.harga %> 
                                             </tr>
-                                        <?php $i++;
-                                        } ?>
+                                            <% }) %> 
                                         <tr>
-                                            <?php
+                                            <!-- <?php
                                             $meja = mysqli_query($conn, "SELECT * FROM meja WHERE status_meja=1 AND status_nota=0 AND no_meja='$no_meja' ");
                                             $nota = mysqli_num_rows($meja);
                                             if ($nota > 0) {
@@ -192,15 +186,16 @@
                                             } else {
                                             ?>
                                                 <th scope="row"><button class="btn btn-secondary">Nota</a></th>
-                                            <?php } ?>
+                                            <?php } ?> -->
+                                            <th scope="row"></th><!-- nnti ini dihapus -->
                                             <th scope="row"></th>
                                             <th scope="row"></th>
                                             <th scope="row">Subtotal</th>
-                                            <th scope="row"><?= "Rp. " . format_ribuan($total) ?></th>
+                                            <th scope="row"><%= "Rp. " + total %></th>
                                         </tr>
                                     </tbody>
                                 </table>
-                            <?php } ?> -->
+                                <% } %> 
                             <br><br>
                         </div>
                     </div>
