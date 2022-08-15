@@ -22,7 +22,8 @@
             aria-label="Checkbox for following text input" id="data" name="data"
             class="mx-2" value="<%= result.id %>" 
             <% bahan_baku.forEach(bahan => { %> 
-              <%= result.id === bahan.bahanId ? `checked` : ``  }) %> />
+              <%= result.id === bahan.bahanId ? `checked` : ``  %>
+              <% }) %>  />
             <%= result.name %> <% }); array = [] %>
           </div>
         </div>
